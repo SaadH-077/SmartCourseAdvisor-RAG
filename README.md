@@ -1,49 +1,131 @@
-# GenAI-Group16: RAG Model for Speech and Language Processing
-Welcome to the repository for GenAI-Group16, where we have developed a Retrieval-Augmented Generation (RAG) model for the course on Speech and Language Processing for Generative AI. This project aims to enhance course recommendation systems by integrating state-of-the-art AI techniques.
+# 🎓 RAG-Based Course Recommender for Academic Advising
 
-### Project Overview
-Our RAG model leverages the power of large language models and vector embeddings to provide precise course recommendations based on a student’s academic profile and interests. This system not only suggests courses but also predicts workload and provides tailored self-study resources.
+This repository contains the implementation of a **Retrieval-Augmented Generation (RAG)** system developed to assist university students in selecting the most suitable courses based on reviews, outlines, and historical feedback. The project was built as part of a university course on **Speech and Language Processing for Generative AI**, using state-of-the-art LLMs and embedding models.
 
-### Features
-Personalized Course Recommendations: Utilizes student data to suggest suitable courses.
-Workload Prediction: Estimates the potential workload for recommended courses.
-Resource Retrieval: Automatically identifies and retrieves relevant self-study materials.
+> 📘 **Institution**: Lahore University of Management Sciences (LUMS)  
+> 🧠 **Course**: Speech & Language Processing for Generative AI  
+> 🗓️ **Semester**: Spring 2024
 
-# Technical Description
-### Model Architecture
-Our project employs a Retrieval-Augmented Generation (RAG) architecture, which combines the benefits of retrieval-based and generative AI models to enhance the relevance and accuracy of course recommendations.
+---
 
-### Vector Embedding
-The model uses Ollama Embeddings from the LangChain community for vector embedding. These embeddings are crucial for transforming textual data into numerical data that can be efficiently processed and compared by our model.
+## 🧠 Project Overview
 
-### Vector Store
-We utilize Chroma, a vector storage solution from the LangChain community, to manage and retrieve vector embeddings effectively. Chroma supports efficient querying and scalability, essential for handling our dataset.
+The system provides a personalized academic advising chatbot powered by a RAG pipeline. It retrieves relevant course reviews and outlines based on user queries and uses a fine-tuned LLM to provide concise, informed responses about course workload, difficulty, prerequisites, and study suggestions.
 
-### Language Model (LLM)
-The backbone of our generative capabilities is the HuggingFace Hub LLM. This pre-trained model facilitates the generation of text and enables the nuanced understanding of complex queries and materials.
+The backend integrates:
+- Rich historical reviews gathered from the **LUMS Discussion Forum** and Google Forms
+- Manually curated **course outlines** from the Registrar Portal
+- Semantic **vector embedding** using `nomic-embed-text`
+- **Conversational memory** using LangChain to support follow-up queries
 
-### Dataset
-Our dataset comprises diverse course outlines and student feedback collected from multiple academic institutions. It includes detailed annotations on course content, difficulty levels, and student outcomes to train our model comprehensively.
+---
 
-# Getting Started
+## 🖼️ Pipeline Overview
+
+![Pipeline Architecture](Pipeline.jpeg)
+
+---
+
+## 📁 Directory Structure
+
+```
+RAG-Course-Recommender/
+│
+├── data/                          # Raw and processed academic data
+│   ├── course reviews/           # Collected Google Form + LDF reviews
+│   └── vector_store_nomic/       # Precomputed vector embeddings
+│
+├── flagged/                      # Manually flagged outputs (low quality)
+│
+├── notebooks/                    # Development notebooks
+│   └── main.ipynb
+│
+├── report/                       # Final submission documents
+│   ├── G16-Final_Report.pdf
+│   └── G16-Poster.pdf
+│
+├── Pipeline.jpeg                 # Architectural pipeline visualization
+├── requirements.txt              # Python dependencies
+├── README.md                     # Project documentation
+├── .gitignore
+└── .DS_Store                     # (To be deleted)
+```
+
+---
+
+## 🔧 Technical Stack
+
+| Component             | Technology Used                         |
+|----------------------|------------------------------------------|
+| Vector Embedding      | `nomic-embed-text` from Ollama           |
+| Vector Store          | ChromaDB (via LangChain)                 |
+| Language Model        | `mistralai/Mistral-7B-Instruct-v0.2`     |
+| Prompt Template       | LangChain PromptTemplate                 |
+| Memory Chain          | LangChain ConversationBufferMemory       |
+| Document Loaders      | `PyPDFLoader`, `Docx2txtLoader`          |
+| Interface             | Gradio with local + ngrok link sharing   |
+
+---
+
+## ✨ Key Features
+
+- 🔍 **Semantic Document Retrieval**: Matches user prompts with relevant reviews and outlines  
+- 🧠 **LLM-Powered Reasoning**: Generates summaries, advice, and answers using context-aware prompts  
+- 💬 **Conversational Memory**: Tracks prior queries to support follow-up questions  
+- 📊 **Multi-source Data**: Combines formal outlines and student opinions  
+- 🌐 **Gradio Interface**: Lightweight, shareable user interface for easy access
+
+---
+
+## 🚀 Getting Started
+
 ### Prerequisites
- - Python 3.8+
- - pip
- - virtualenv (optional)
+
+- Python 3.9+
+- `pip` or `conda`
 
 ### Installation
- - Clone the repository and install the required packages:
 
- - git clone https://github.com/YourRepository/GenAI-Group16.git
- - cd GenAI-Group16
- - pip install -r requirements.txt
+```bash
+git clone https://github.com/SaadH-077/RAG-Course-Recommender.git
+cd RAG-Course-Recommender
+pip install -r requirements.txt
+```
 
+---
 
-### Running the Model
-To start the model and access the course recommendation system, execute:
-- python run_model.py
+## ▶️ Running the Application
 
+You can launch the interactive chatbot through the Gradio interface by running:
 
+```bash
+python main.py
+```
 
+This will start a local server (and optionally a public link via ngrok).
 
+---
 
+## 📄 Final Deliverables
+
+- 📘 [G16-Final Report (PDF)](report/G16-Final_Report.pdf)
+- 📊 [G16 Poster Presentation (PDF)](report/G16-Poster.pdf)
+
+These documents contain detailed methodology, model comparisons, results, and future work.
+
+---
+
+## 📌 Citation
+
+If you reference this project in academic or practical work:
+
+```bibtex
+@project{RAGCourseAdviser2025,
+  title = {RAG-Based Course Recommender for Academic Advising},
+  note = {Developed for Speech & Language Processing for Generative AI, Spring 2025, LUMS}
+}
+```
+
+---
+
+> “Retrieval grounds generation — context is not optional, it's everything.”
